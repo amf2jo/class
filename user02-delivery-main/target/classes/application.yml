@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+---
+
+spring:
+  profiles: default
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+        streams:
+          binder:
+            configuration:
+              default:
+                key:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                value:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      bindings:
+        event-in:
+          group: delivery
+          destination: team
+          contentType: application/json
+        event-out:
+          destination: team
+          contentType: application/json
+
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework.cloud: debug
+server:
+  port: 8084
+---
+
+spring:
+  profiles: docker
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/class?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: Sktngm12@@
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true  
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: my-kafka.kafka.svc.cluster.local:9092
+        streams:
+          binder:
+            configuration:
+              default:
+                key:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                value:
+                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      bindings:
+        event-in:
+          group: delivery
+          destination: team
+          contentType: application/json
+        event-out:
+          destination: team
+          contentType: application/json
