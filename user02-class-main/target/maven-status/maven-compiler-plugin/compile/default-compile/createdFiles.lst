@@ -1,0 +1,15 @@
+classnew\ClassRegisted.class
+classnew\ClassCanceled.class
+classnew\PolicyHandler.class
+classnew\config\kafka\KafkaProcessor.class
+classnew\ClassController.class
+classnew\ClassRepository.class
+classnew\AbstractEvent.class
+classnew\ClassApplication.class
+classnew\external\PaymentServiceFallback.class
+classnew\CourseDeleted.class
+classnew\external\PaymentService$PaymentServiceConfiguration.class
+classnew\Class.class
+classnew\external\Payment.class
+classnew\external\PaymentService.class
+classnew\AbstractEvent$1.class
